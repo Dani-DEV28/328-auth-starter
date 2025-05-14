@@ -2,6 +2,8 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import router from './routes/router.js';
+import './auth/localStrategy.js'
+import passport from 'passport';
 
 const app = express();
 
@@ -18,6 +20,9 @@ app.use(session({
 }))
 
 //configure passport...
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
